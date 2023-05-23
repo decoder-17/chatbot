@@ -1,11 +1,13 @@
+<p align="center">
+<a href="#"><img title="Whatsapp-Bot" src="https://github.com/decoder-17/chatbot/blob/master/logo.png"></a>
+</p>
+<h1 align="center">
+  ChatBot 
+  </h1>
 
-# ChatBot - Caelius Consulting
-
-![Logo](https://github.com/decoder-17/chatbot/blob/master/logo.png)
+<p align="center">
 ChatBot powered by OpenAI, the leading artificial intelligence platform.
-
-
-
+</p>
 
 ## Local Deployment Guide
 
@@ -22,9 +24,11 @@ To successfully run the Telegram bot locally, make sure you have the following:
 ### Setup Instructions
 
 Follow the steps below to set up and run the Telegram bot locally:
-- Clone or download the Telegram Bot Java project to your local machine.
+- Clone or download the ChatBot project to your local machine. <br/>
+`$ git clone https://github.com/decoder-17/chatbot` 
 - Open your preferred IDE and import the project.
 - Set up system environment variables for your Telegram Bot Token and OpenAI API credentials:
+
   
   - **Windows**: Open the command prompt and execute the following command:
     ```bash
@@ -55,9 +59,10 @@ To successfully run the Telegram bot locally, make sure you have the following:
 ### Setup Instructions
 
 Follow the steps below to set up and run the Telegram bot using Docker:
-- Clone or download the Telegram Bot Java project to your local machine.
+- Clone or download the ChatBot project to your local machine. <br/>
+`$ git clone https://github.com/decoder-17/chatbot` 
 - Open your preferred IDE and import the project.
-- Build the Docker image using the provided Dockerfile:
+- Build the Docker image using docker compose :
   ```bash
   docker compose build
   ```
@@ -66,7 +71,7 @@ Follow the steps below to set up and run the Telegram bot using Docker:
   - **Windows**: Open the command prompt and execute the following command:
     ```bash
     setx BOT_TOKEN "YOUR_TELEGRAM_BOT_TOKEN"
-    setx OPENAI_TOEKN "YOUR_OPENAI_TOKEN"
+    setx OPENAI_TOKEN "YOUR_OPENAI_TOKEN"
     ```
   - **Linux/macOS**: Open the terminal and execute the following command:
     ```bash
@@ -75,8 +80,7 @@ Follow the steps below to set up and run the Telegram bot using Docker:
     ```
 - Run the Docker container using the built image:
   ```bash
-  docker run -d --name telegram-bot-container -e BOT_TOKEN=$BOT_TOKEN OPENAI_TOKEN=$OPENAI_TOKEN telegram-bot
-
+  docker compose up
   ```
 
 - Congratulations! Your Telegram bot is now running inside a Docker container and ready to respond to user queries.
@@ -108,5 +112,5 @@ To learn about the bot and it's creator:
 ```
 ## Support
 
-For support, email tanupamsaha26@gmail.com or raise an issue.
+> For support, email tanupamsaha26@gmail.com or raise an issue.
 
