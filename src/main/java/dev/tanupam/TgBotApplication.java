@@ -6,6 +6,7 @@ import java.lang.management.RuntimeMXBean;
 
 import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.request.SendMessage;
+import dev.tanupam.bot_commands.AboutController;
 import dev.tanupam.bot_commands.HelpController;
 import dev.tanupam.bot_commands.SearchController;
 import org.springframework.boot.SpringApplication;
@@ -52,6 +53,19 @@ public class TgBotApplication implements TelegramMvcController {
 		else
 		SearchController.searchQuestion(bot, message, chat, query);
 
+	}
+
+	@BotRequest("/about")
+	public void about(Chat chat, Message message, TelegramBot bot) throws IOException {
+		// Get the jvm uptime
+		RuntimeMXBean runtimeMXBean = ManagementFactory.getRuntimeMXBean();
+		long uptime = runtimeMXBean.getUptime();
+		long uptimeInSeconds = uptime / 1000;
+		long numberOfHours = uptimeInSeconds / 3600;
+		long numberOfMinutes = (uptimeInSeconds % 3600) / 60;
+		long numberOfSeconds = uptimeInSeconds % 60;
+		String uptimeString = numberOfHours + " hours " + numberOfMinutes + " minutes " + numberOfSeconds + " seconds";
+		AboutController.about(bot, message, chat, uptimeString);
 	}
 
 	public static void main(String[] args) {

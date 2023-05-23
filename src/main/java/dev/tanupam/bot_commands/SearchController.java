@@ -19,18 +19,16 @@ public class SearchController {
     public static void searchQuestion(TelegramBot bot, Message message, Chat chat, String query) throws IOException, InterruptedException {
 
         ObjectMapper objectMapper = new ObjectMapper();
-        ChatGPTReq chatGPTReq = new ChatGPTReq("text-davinci-001", query, 1, 100);
+        ChatGPTReq chatGPTReq = new ChatGPTReq("text-davinci-001", query, 1, 200);
         String input = objectMapper.writeValueAsString(chatGPTReq);
-
-            HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.openai.com/v1/completions")).header("Content-Type", "application/json").header("Authorization", "Bearer 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").POST(HttpRequest.BodyPublishers.ofString(input)).build();
+            HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.openai.com/v1/completions")).header("Content-Type", "application/json").header("Authorization", ("Bearer %s").formatted(System.getenv("OPENAI_TOKEN"))).POST(HttpRequest.BodyPublishers.ofString(input)).build();
 
             HttpClient client = HttpClient.newHttpClient();
             var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == 200) {
                 ChatGPTRes chatGPTRes = objectMapper.readValue(response.body(), ChatGPTRes.class);
-                for(var i:chatGPTRes.choices())
-                    System.out.println(i.text());
+
                 String answer = chatGPTRes.choices()[chatGPTRes.choices().length - 1].text();
                 if (!answer.isEmpty())
                     bot.execute(new SendMessage(chat.id(), answer.trim()).parseMode(ParseMode.HTML).replyToMessageId(message.messageId()));
