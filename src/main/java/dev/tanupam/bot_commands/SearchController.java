@@ -41,7 +41,6 @@ public class SearchController {
                         for(var i:answer.split(" ")) {
                             questionResponse.append(i).append(" ");
                             EditMessageText editMessageText = new EditMessageText(chat.id(), sendResponse.message().messageId(), questionResponse.toString());
-                            System.out.println(questionResponse);
                             bot.execute(editMessageText);
                         }
 

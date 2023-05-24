@@ -33,7 +33,7 @@ Follow the steps below to set up and run the Telegram bot locally:
   - **Windows**: Open the command prompt and execute the following command:
     ```bash
     setx BOT_TOKEN "YOUR_TELEGRAM_BOT_TOKEN"
-    setx OPENAI_TOEKN "YOUR_OPENAI_TOKEN"
+    setx OPENAI_TOKEN "YOUR_OPENAI_TOKEN"
     ```
   - **Linux/macOS**: Open the terminal and execute the following command:
     ```bash
