@@ -16,14 +16,13 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.concurrent.TimeUnit;
 
 public class SearchController {
     public static void searchQuestion(TelegramBot bot, Message message, Chat chat, String query) throws IOException, InterruptedException {
 
         SendResponse sendResponse = bot.execute(new SendMessage(chat.id(), "Fetching results, please wait.").replyToMessageId(message.messageId()));
         ObjectMapper objectMapper = new ObjectMapper();
-        ChatGPTReq chatGPTReq = new ChatGPTReq("text-davinci-001", query, 1, 200);
+        ChatGPTReq chatGPTReq = new ChatGPTReq("text-davinci-003", query, 0, 3996);
         String input = objectMapper.writeValueAsString(chatGPTReq);
             HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.openai.com/v1/completions")).header("Content-Type", "application/json").header("Authorization", ("Bearer %s").formatted(System.getenv("OPENAI_TOKEN"))).POST(HttpRequest.BodyPublishers.ofString(input)).build();
             HttpClient client = HttpClient.newHttpClient();
@@ -32,7 +31,7 @@ public class SearchController {
             if (response.statusCode() == 200) {
                 ChatGPTRes chatGPTRes = objectMapper.readValue(response.body(), ChatGPTRes.class);
                 String answer = chatGPTRes.choices()[chatGPTRes.choices().length - 1].text();
-                String questionResponse= "";
+                StringBuffer questionResponse = new StringBuffer();
                 if(answer == null) {
                     EditMessageText editMessageText = new EditMessageText(chat.id(), sendResponse.message().messageId(), "Sorry, could not understand the question. Please try rephrasing your question.");
                     bot.execute(editMessageText);
@@ -40,8 +39,9 @@ public class SearchController {
                 else {
                     if (!answer.isEmpty())
                         for(var i:answer.split(" ")) {
-                            questionResponse+=i + " ";
-                            EditMessageText editMessageText = new EditMessageText(chat.id(), sendResponse.message().messageId(), questionResponse).parseMode(ParseMode.HTML);
+                            questionResponse.append(i).append(" ");
+                            EditMessageText editMessageText = new EditMessageText(chat.id(), sendResponse.message().messageId(), questionResponse.toString());
+                            System.out.println(questionResponse);
                             bot.execute(editMessageText);
                         }
 
