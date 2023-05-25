@@ -30,6 +30,7 @@ public class TgBotApplication implements TelegramMvcController {
 
 	@Override
 	public String getToken() {
+		System.out.println("Token: " + token);
 		return token;
 	}
 
@@ -40,7 +41,7 @@ public class TgBotApplication implements TelegramMvcController {
 
 	@BotRequest("/help")
 	public void help(Chat chat, Message message,
-					 TelegramBot bot)
+			TelegramBot bot)
 			throws IOException {
 		HelpController.sendHelp(bot, message, chat);
 	}
@@ -48,10 +49,11 @@ public class TgBotApplication implements TelegramMvcController {
 	@BotRequest("/search{query}")
 	public void searchQuestion(@BotPathVariable("query") String query, Chat chat, Message message, TelegramBot bot)
 			throws IOException, InterruptedException {
-		if(query.isEmpty())
-			bot.execute(new SendMessage(chat.id(), "Please enter a valid query.").parseMode(ParseMode.HTML).replyToMessageId(message.messageId()));
+		if (query.isEmpty())
+			bot.execute(new SendMessage(chat.id(), "Please enter a valid query.").parseMode(ParseMode.HTML)
+					.replyToMessageId(message.messageId()));
 		else
-		SearchController.searchQuestion(bot, message, chat, query);
+			SearchController.searchQuestion(bot, message, chat, query);
 
 	}
 
