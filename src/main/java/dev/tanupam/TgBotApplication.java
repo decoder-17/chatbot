@@ -26,11 +26,10 @@ import dev.tanupam.bot_commands.StartController;
 @BotController
 public class TgBotApplication implements TelegramMvcController {
 
-	private String token = System.getenv("BOT_TOKEN").toString();
+	private String token = System.getenv("CHAT_BOT_TOKEN");
 
 	@Override
 	public String getToken() {
-		System.out.println("Token: " + token);
 		return token;
 	}
 

@@ -32,12 +32,12 @@ Follow the steps below to set up and run the Telegram bot locally:
   
   - **Windows**: Open the command prompt and execute the following command:
     ```bash
-    setx BOT_TOKEN "YOUR_TELEGRAM_BOT_TOKEN"
+    setx CHAT_BOT_TOKEN "YOUR_TELEGRAM_BOT_TOKEN"
     setx OPENAI_TOKEN "YOUR_OPENAI_TOKEN"
     ```
   - **Linux/macOS**: Open the terminal and execute the following command:
     ```bash
-    export BOT_TOKEN="YOUR_TELEGRAM_BOT_TOKEN"
+    export CHAT_BOT_TOKEN="YOUR_TELEGRAM_BOT_TOKEN"
     export OPENAI_TOKEN="YOUR_OPENAI_TOKEN"
     ```
 - In your IDE, locate the `Main` class and run it.
@@ -70,12 +70,12 @@ Follow the steps below to set up and run the Telegram bot using Docker:
   
   - **Windows**: Open the command prompt and execute the following command:
     ```bash
-    setx BOT_TOKEN "YOUR_TELEGRAM_BOT_TOKEN"
+    setx CHAT_BOT_TOKEN "YOUR_TELEGRAM_BOT_TOKEN"
     setx OPENAI_TOKEN "YOUR_OPENAI_TOKEN"
     ```
   - **Linux/macOS**: Open the terminal and execute the following command:
     ```bash
-    export BOT_TOKEN="YOUR_TELEGRAM_BOT_TOKEN"
+    export CHAT_BOT_TOKEN="YOUR_TELEGRAM_BOT_TOKEN"
     export OPENAI_TOKEN="YOUR_OPENAI_TOKEN"
     ```
 - Run the Docker container using the built image:
