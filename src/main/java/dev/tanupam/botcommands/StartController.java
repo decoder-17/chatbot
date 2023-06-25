@@ -1,4 +1,4 @@
-package dev.tanupam.bot_commands;
+package dev.tanupam.botcommands;
 
 import java.io.IOException;
 

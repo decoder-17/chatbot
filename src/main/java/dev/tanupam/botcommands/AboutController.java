@@ -1,4 +1,4 @@
-package dev.tanupam.bot_commands;
+package dev.tanupam.botcommands;
 
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.Chat;

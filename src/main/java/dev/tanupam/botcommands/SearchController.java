@@ -1,4 +1,4 @@
-package dev.tanupam.bot_commands;
+package dev.tanupam.botcommands;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pengrad.telegrambot.TelegramBot;
@@ -9,7 +9,6 @@ import com.pengrad.telegrambot.request.SendMessage;
 import com.pengrad.telegrambot.response.SendResponse;
 import dev.tanupam.model.ChatGPTReq;
 import dev.tanupam.model.ChatGPTRes;
-import org.apache.logging.log4j.util.StringBuilderFormattable;
 
 import java.io.IOException;
 import java.net.URI;
@@ -24,9 +23,10 @@ public class SearchController {
         ObjectMapper objectMapper = new ObjectMapper();
         ChatGPTReq chatGPTReq = new ChatGPTReq("text-davinci-003", query, 1, 3996);
         String input = objectMapper.writeValueAsString(chatGPTReq);
-            HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.openai.com/v1/completions")).header("Content-Type", "application/json").header("Authorization", ("Bearer %s").formatted(System.getenv("OPENAI_TOKEN"))).POST(HttpRequest.BodyPublishers.ofString(input)).build();
-            HttpClient client = HttpClient.newHttpClient();
-            var response = client.send(request, HttpResponse.BodyHandlers.ofString());
+
+        HttpRequest request = HttpRequest.newBuilder().uri(URI.create("https://api.openai.com/v1/completions")).header("Content-Type", "application/json").header("Authorization", ("Bearer %s").formatted(System.getenv("OPENAI_TOKEN"))).POST(HttpRequest.BodyPublishers.ofString(input)).build();
+        HttpClient client = HttpClient.newHttpClient();
+        var response = client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == 200) {
                 ChatGPTRes chatGPTRes = objectMapper.readValue(response.body(), ChatGPTRes.class);
@@ -50,8 +50,5 @@ public class SearchController {
                     }
                 }
             }
-
-
-
     }
 }
